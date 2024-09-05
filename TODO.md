@@ -1,4 +1,4 @@
-# add file input
+# allow drag and drop onto the overlay
 # fix images
 # add classic support 
 (change how i save them to be eos compatible)

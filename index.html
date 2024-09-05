@@ -1,7 +1,9 @@
 <!doctype html>
 <html>
+
 <head>
-  <meta name="viewport" content="user-scalable=0, initial-scale=1, minimum-scale=1, width=device-width, height=device-height">
+  <meta name="viewport"
+    content="user-scalable=0, initial-scale=1, minimum-scale=1, width=device-width, height=device-height">
   <meta name="theme-color" content="#000000">
   <title>Tease Player</title>
   <link rel="icon" type="image/png" href="./icon.png?" />
@@ -10,27 +12,20 @@
   <script type="text/javascript" src="./script/eos.outer.js?_"></script>
   <script>
     var searchParams = new URLSearchParams(window.location.search)
-    if (!searchParams.has('_dt')){
+    if (!searchParams.has('_dt')) {
       searchParams.append('_dt', Date.now())
     }
   </script>
 </head>
-<body
-  class="eosTopBody"
-  data-tease-id="0"
-  data-title="TEASE_TITLE"
-  data-author-id="0"
-  data-author="TEASE_AUTHOR"
-  data-key=""
-  data-preview="false"
-  data-is-logged-in="false"
->
+
+<body class="eosTopBody" data-tease-id="0" data-title="TEASE_TITLE" data-author-id="0" data-author="TEASE_AUTHOR"
+  data-key="" data-preview="false" data-is-logged-in="false">
   <div id="eosRatingDialog" class="eosRatingDialog">
     <div>
       <div class="close">
         &times;
       </div>
-            <p class="message">
+      <p class="message">
         Choose your rating
       </p>
       <div class="stars">
@@ -52,12 +47,64 @@
         </svg>
       -->
       </div>
-          </div>
+    </div>
   </div>
-  <iframe
-    class="eosIframe"
-    src="./eos.html"
-    allowfullscreen
-    ></iframe>
+  <iframe class="eosIframe" src="./eos.html" allowfullscreen></iframe>
+  <!--File input START-->
+  <style>
+    #overlay {
+      position: fixed;
+      display: none;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 2;
+      cursor: pointer;
+      color: rgb(255, 255, 255);
+      font-size: 20px;
+    }
+
+    #overlay div {
+      margin: auto;
+    }
+  </style>
+  <div id="overlay" ondragover="event.preventDefault()">
+    <div>
+      Please choose a .json-file of a milovana Tease
+      <br><br>
+      <input id="fileInput" type="file" accept=".json">
+    </div>
+  </div>
+  <script>
+    document.getElementById("overlay").style.display = "flex";
+
+    function getUploadedJson() {
+      return new Promise((resolve) => {
+        const fileInput = document.getElementById('fileInput');
+
+        fileInput.addEventListener('change', async function (event) {
+          const file = event.target.files[0];
+          if (file) {
+            try {
+              let json = JSON.parse(await file.text())
+              document.getElementById("overlay").style.display = "none";
+              resolve(json);
+            } catch {
+              alert("Invalid File. Try again");
+            }
+
+          }
+        }, { once: true }); // `{ once: true }` ensures the event listener is removed after the file upload
+      });
+    }
+  </script>
+  <!--File input END-->
+
 </body>
+
 </html>

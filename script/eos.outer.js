@@ -17,7 +17,7 @@ jQuery(function () {
         document.head.appendChild(link);
       }
       link.href = './icon.png?' + Date.now();
-      return fetch('eosscript.json?_dt=' + Date.now() + '&id=' + teaseId + (preview ? '&preview=1' : '') + (key ? '&key=' + key : ''), { credentials: 'same-origin' }).then(function (res) { return res.json() }).then(function (json) {
+      return getUploadedJson().then(function (json) {
         if (json.hasOwnProperty("oeosmeta")) {
           if (json["oeosmeta"].hasOwnProperty("title")) {
             title = json['oeosmeta']['title'];
