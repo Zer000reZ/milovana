@@ -10,15 +10,12 @@ jQuery(function () {
       var author = document.body.getAttribute('data-author')
       var preview = document.body.getAttribute('data-preview') === 'true' || searchParams.has('preview')
       var key = document.body.getAttribute('data-key')
-      var link = document.querySelector("link[rel~='icon']");
-      if (!link) {
-        link = document.createElement('link');
-        link.rel = 'icon';
-        document.head.appendChild(link);
-      }
-      link.href = './icon.png?' + Date.now();
       return getUploadedJson().then(function (json) {
         if (json.hasOwnProperty("oeosmeta")) {
+          if (json["oeosmeta"].hasOwnProperty("typ") && json['oeosmeta']['typ'] == 'classic') {
+            alert("Classic Teases are not supported")
+            location.reload();
+          }
           if (json["oeosmeta"].hasOwnProperty("title")) {
             title = json['oeosmeta']['title'];
           }
