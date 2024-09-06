@@ -1,5 +1,4 @@
 # Website
-### fix images
 ### allow drag and drop onto the overlay
 
 # Colection
