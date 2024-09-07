@@ -2589,7 +2589,7 @@
 											}
 											return e.abrupt("return");
 										case 3:
-											return e.prev = 3, e.next = 6, fetch(n, {
+											return e.prev = 3, e.next = 6, fetch(n.replace(/.+\/timg/, "https://media.milovana.com/timg"), {
 												signal: r,
 												mode: "cors"
 											});
